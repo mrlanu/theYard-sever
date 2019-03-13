@@ -1,6 +1,8 @@
 package com.lanu.the_yard.security;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.lanu.the_yard.entities.Company;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,7 +21,22 @@ public class User{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    private Company company;
+
     private String username;
+
+    private String firstName;
+
+    private String lastName;
+
+    @Enumerated(EnumType.STRING)
+    private Occupation occupation;
+
+    public enum Occupation{
+        DISPATCH, DRIVER, ACCOUNTER, MECHANIC, BOSS
+    }
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
