@@ -1,8 +1,8 @@
 package com.lanu.the_yard.security;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.lanu.the_yard.entities.Company;
+import com.lanu.the_yard.entities.Trailer;
 import lombok.*;
 
 import javax.persistence.*;
@@ -34,7 +34,7 @@ public class User{
     @Enumerated(EnumType.STRING)
     private Occupation occupation;
 
-    public enum Occupation{
+    private enum Occupation{
         DISPATCH, DRIVER, ACCOUNTER, MECHANIC, BOSS
     }
 
@@ -45,4 +45,7 @@ public class User{
 
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles;
+
+    @OneToOne
+    private Trailer trailer;
 }
