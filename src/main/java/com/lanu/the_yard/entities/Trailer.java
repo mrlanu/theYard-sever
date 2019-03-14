@@ -14,7 +14,7 @@ public class Trailer {
 
     private Long companyId;
 
-    private Long number;
+    private String number;
 
     @Enumerated(EnumType.STRING)
     private TrailerType type;
