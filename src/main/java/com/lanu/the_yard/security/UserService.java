@@ -1,5 +1,7 @@
 package com.lanu.the_yard.security;
 
+import com.lanu.the_yard.entities.Trailer;
+
 import java.util.Optional;
 
 public interface UserService {
@@ -13,4 +15,6 @@ public interface UserService {
     Optional<User> findByUsername(String userName);
 
     User saveUser(User user);
+
+    Trailer getCurrentTrailer(String userName);
 }
