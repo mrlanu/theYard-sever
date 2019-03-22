@@ -39,9 +39,23 @@ public class TrailerController {
         return theUser.getTrailer();
     }
 
+    @GetMapping("/pickup")
+    public ResponseEntity<?> pickUpTrailer(Principal principal, @RequestParam(name = "trailerId") Long trailerId){
+        User theUser = userService.findByUsername(principal.getName()).get();
+        Trailer theTrailer = trailerService.findTrailerById(trailerId);
+        theTrailer.setAvailable(false);
+        theTrailer = trailerService.save(theTrailer);
+        theUser.setTrailer(theTrailer);
+        userService.saveUser(theUser);
+        return ResponseEntity.ok().build();
+    }
+
     @GetMapping("/drop")
     public ResponseEntity<?> dropCurrentTrailer(Principal principal){
         User theUser = userService.findByUsername(principal.getName()).get();
+        Trailer theTrailer = theUser.getTrailer();
+        theTrailer.setAvailable(true);
+        trailerService.save(theTrailer);
         theUser.setTrailer(null);
         userService.saveUser(theUser);
         return ResponseEntity.ok().build();
