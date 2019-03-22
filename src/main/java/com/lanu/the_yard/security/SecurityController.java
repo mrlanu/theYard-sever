@@ -1,6 +1,5 @@
 package com.lanu.the_yard.security;
 
-import com.lanu.the_yard.entities.Trailer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,10 +23,5 @@ public class SecurityController {
     @GetMapping("/user")
     public User getLoggedInUser(Principal principal){
         return userService.findByUsername(principal.getName()).get();
-    }
-
-    @GetMapping("/user/trailer")
-    public Trailer getCurrentTrailer(Principal principal){
-        return userService.getCurrentTrailer(principal.getName());
     }
 }

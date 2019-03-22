@@ -1,6 +1,5 @@
 package com.lanu.the_yard.security;
 
-import com.lanu.the_yard.entities.Trailer;
 import com.lanu.the_yard.exceptions.UserAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -47,14 +46,8 @@ public class UserServiceImpl implements UserService{
         return userRepository.findByUsername(userName);
     }
 
-
     @Override
     public boolean existByUsername(String username) {
         return userRepository.existsByUsername(username);
-    }
-
-    @Override
-    public Trailer getCurrentTrailer(String userName) {
-        return findByUsername(userName).get().getTrailer();
     }
 }

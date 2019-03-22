@@ -47,5 +47,6 @@ public class User{
     private List<Role> roles;
 
     @OneToOne
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Trailer trailer;
 }
