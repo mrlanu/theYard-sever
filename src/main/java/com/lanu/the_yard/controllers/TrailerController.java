@@ -36,7 +36,7 @@ public class TrailerController {
     @GetMapping("/user")
     public Trailer getCurrentTrailer(Principal principal){
         User theUser = userService.findByUsername(principal.getName()).get();
-        return theUser.getTrailer();
+        return trailerService.findTrailerByUserId(theUser.getUserId());
     }
 
     @GetMapping("/pickup")
@@ -44,20 +44,18 @@ public class TrailerController {
         User theUser = userService.findByUsername(principal.getName()).get();
         Trailer theTrailer = trailerService.findTrailerById(trailerId);
         theTrailer.setAvailable(false);
-        theTrailer = trailerService.save(theTrailer);
-        theUser.setTrailer(theTrailer);
-        userService.saveUser(theUser);
+        theTrailer.setUser(theUser);
+        trailerService.save(theTrailer);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("/drop")
     public ResponseEntity<?> dropCurrentTrailer(Principal principal){
         User theUser = userService.findByUsername(principal.getName()).get();
-        Trailer theTrailer = theUser.getTrailer();
+        Trailer theTrailer = trailerService.findTrailerByUserId(theUser.getUserId());
         theTrailer.setAvailable(true);
+        theTrailer.setUser(null);
         trailerService.save(theTrailer);
-        theUser.setTrailer(null);
-        userService.saveUser(theUser);
         return ResponseEntity.ok().build();
     }
 }

@@ -18,8 +18,11 @@ public class TrailerServiceImpl implements TrailerService {
     @Override
     public Trailer findTrailerById(Long id) {
         return trailerRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("TrailerId " + id + " not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("TrailerId " + id + " not found")); }
 
+    @Override
+    public Trailer findTrailerByUserId(Long userId) {
+        return trailerRepository.findByUser_UserId(userId);
     }
 
     @Override

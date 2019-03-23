@@ -8,6 +8,7 @@ import java.util.List;
 public interface TrailerService {
 
     Trailer findTrailerById(Long id);
+    Trailer findTrailerByUserId(Long userId);
     List<Trailer> findAllByCompanyId(Long companyId);
     Trailer createNewTrailer(Trailer trailer, User user);
     Trailer save(Trailer trailer);

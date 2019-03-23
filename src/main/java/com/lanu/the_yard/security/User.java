@@ -45,8 +45,4 @@ public class User{
 
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles;
-
-    @OneToOne
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private Trailer trailer;
 }
