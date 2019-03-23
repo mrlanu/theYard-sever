@@ -49,13 +49,8 @@ public class TrailerController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/drop")
-    public ResponseEntity<?> dropCurrentTrailer(Principal principal){
-        User theUser = userService.findByUsername(principal.getName()).get();
-        Trailer theTrailer = trailerService.findTrailerByUserId(theUser.getUserId());
-        theTrailer.setAvailable(true);
-        theTrailer.setUser(null);
-        trailerService.save(theTrailer);
-        return ResponseEntity.ok().build();
+    @PostMapping("/drop")
+    public Trailer dropCurrentTrailer(@Valid @RequestBody Trailer trailer){
+        return trailerService.save(trailer);
     }
 }

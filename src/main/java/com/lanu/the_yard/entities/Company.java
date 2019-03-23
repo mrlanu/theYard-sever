@@ -2,13 +2,16 @@ package com.lanu.the_yard.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.lanu.the_yard.security.User;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Company {
 
     @Id

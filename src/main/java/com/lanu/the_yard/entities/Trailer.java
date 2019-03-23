@@ -2,12 +2,15 @@ package com.lanu.the_yard.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.lanu.the_yard.security.User;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Trailer {
 
     @Id
@@ -22,7 +25,7 @@ public class Trailer {
     private TrailerType type;
 
     private enum TrailerType{
-        DRY, REEFER
+        DRY, REF
     }
 
     private String location;
@@ -34,6 +37,6 @@ public class Trailer {
     private Boolean railroad;
 
     @OneToOne
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+   // @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private User user;
 }

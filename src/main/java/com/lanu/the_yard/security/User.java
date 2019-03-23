@@ -2,7 +2,6 @@ package com.lanu.the_yard.security;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.lanu.the_yard.entities.Company;
-import com.lanu.the_yard.entities.Trailer;
 import lombok.*;
 
 import javax.persistence.*;
