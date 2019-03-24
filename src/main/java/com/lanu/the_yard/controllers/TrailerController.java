@@ -1,6 +1,8 @@
 package com.lanu.the_yard.controllers;
 
+import com.lanu.the_yard.entities.Log;
 import com.lanu.the_yard.entities.Trailer;
+import com.lanu.the_yard.repositories.LogRepository;
 import com.lanu.the_yard.security.User;
 import com.lanu.the_yard.security.UserService;
 import com.lanu.the_yard.services.TrailerService;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -21,6 +24,9 @@ public class TrailerController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private LogRepository logRepository;
 
     @GetMapping
     public List<Trailer> findAllByCompanyId(@RequestParam(name = "companyId") Long companyId){
@@ -42,15 +48,29 @@ public class TrailerController {
     @GetMapping("/pickup")
     public ResponseEntity<?> pickUpTrailer(Principal principal, @RequestParam(name = "trailerId") Long trailerId){
         User theUser = userService.findByUsername(principal.getName()).get();
+
         Trailer theTrailer = trailerService.findTrailerById(trailerId);
         theTrailer.setAvailable(false);
         theTrailer.setUser(theUser);
-        trailerService.save(theTrailer);
+        theTrailer = trailerService.save(theTrailer);
+
+        newLog(Log.LogAction.PICKUP, theTrailer, theUser);
+
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/drop")
-    public Trailer dropCurrentTrailer(@Valid @RequestBody Trailer trailer){
+    public Trailer dropCurrentTrailer(Principal principal, @Valid @RequestBody Trailer trailer){
+        User theUser = userService.findByUsername(principal.getName()).get();
+
+        newLog(Log.LogAction.DROP, trailer, theUser);
+
         return trailerService.save(trailer);
+    }
+
+    private Log newLog(Log.LogAction logAction, Trailer trailer, User user){
+        return logRepository.save(new Log(null, LocalDateTime.now(),
+                        trailer.getLocation(), logAction,
+                        trailer, user.getLastName()));
     }
 }

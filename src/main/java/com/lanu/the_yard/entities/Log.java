@@ -27,7 +27,7 @@ public class Log {
     @Enumerated(EnumType.STRING)
     private LogAction logAction;
 
-    private enum LogAction{
+    public enum LogAction{
         PICKUP, DROP, BRAKE, FIX
     }
 
