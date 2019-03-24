@@ -22,6 +22,8 @@ public class Log {
 
     private LocalDateTime date;
 
+    private String location;
+
     @Enumerated(EnumType.STRING)
     private LogAction logAction;
 
