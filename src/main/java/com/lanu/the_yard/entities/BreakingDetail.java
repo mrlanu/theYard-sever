@@ -23,9 +23,6 @@ public class BreakingDetail {
 
     private String description;
 
-    @ManyToOne
-    private BreakingReport breakingReport;
-
     private boolean fixed;
 
     private LocalDateTime fixedDateTime;

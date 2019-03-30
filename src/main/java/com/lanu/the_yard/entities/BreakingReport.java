@@ -5,11 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -27,4 +25,8 @@ public class BreakingReport {
     private boolean fixed;
 
     private String userLastName;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "breaking_report_id")
+    private List<BreakingDetail> breakingDetails;
 }
