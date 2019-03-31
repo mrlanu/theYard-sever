@@ -26,4 +26,9 @@ public class BreakingReportServiceImpl implements BreakingReportService {
     public List<BreakingReport> findAllByTrailerId(Long trailerId) {
         return breakingReportRepository.findAllByTrailerId(trailerId);
     }
+
+    @Override
+    public BreakingReport findById(Long id) {
+        return breakingReportRepository.findById(id).get();
+    }
 }

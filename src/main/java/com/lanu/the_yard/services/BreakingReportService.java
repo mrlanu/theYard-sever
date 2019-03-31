@@ -7,4 +7,5 @@ import java.util.List;
 public interface BreakingReportService {
     BreakingReport createBreakingReport(BreakingReport breakingReport);
     List<BreakingReport> findAllByTrailerId(Long trailerId);
+    BreakingReport findById(Long id);
 }

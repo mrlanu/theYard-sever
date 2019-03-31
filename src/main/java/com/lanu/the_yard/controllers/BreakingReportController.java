@@ -9,19 +9,23 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/breaking")
 public class BreakingReportController {
 
     @Autowired
     private BreakingReportService breakingReportService;
 
-    @PostMapping
+    @PostMapping("/breaking")
     public BreakingReport createBreakingReport(@Valid @RequestBody BreakingReport breakingReport){
         return breakingReportService.createBreakingReport(breakingReport);
     }
 
-    @GetMapping("/{trailerId}")
+    @GetMapping("trailers/{trailerId}/breakings")
     public List<BreakingReport> getAllByTrailerId(@PathVariable(value = "trailerId") Long trailerId){
         return breakingReportService.findAllByTrailerId(trailerId);
+    }
+
+    @GetMapping("/breakings/{breakingId}")
+    public BreakingReport getBreakingById(@PathVariable(value = "breakingId") Long breakingId){
+        return breakingReportService.findById(breakingId);
     }
 }
