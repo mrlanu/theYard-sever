@@ -20,13 +20,17 @@ public class BreakingReport {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDateTime dateTime;
+    private LocalDateTime date;
 
     private boolean fixed;
+
+    private LocalDateTime fixedDate;
 
     private String userLastName;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "breaking_report_id")
     private List<BreakingDetail> breakingDetails;
+
+    private Long trailerId;
 }

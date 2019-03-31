@@ -25,5 +25,7 @@ public class BreakingDetail {
 
     private boolean fixed;
 
-    private LocalDateTime fixedDateTime;
+    private LocalDateTime fixedDate;
+
+    private String userLastName;
 }

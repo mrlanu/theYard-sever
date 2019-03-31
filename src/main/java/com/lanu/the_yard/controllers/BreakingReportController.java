@@ -3,12 +3,10 @@ package com.lanu.the_yard.controllers;
 import com.lanu.the_yard.entities.BreakingReport;
 import com.lanu.the_yard.services.BreakingReportService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/breaking")
@@ -20,5 +18,10 @@ public class BreakingReportController {
     @PostMapping
     public BreakingReport createBreakingReport(@Valid @RequestBody BreakingReport breakingReport){
         return breakingReportService.createBreakingReport(breakingReport);
+    }
+
+    @GetMapping("/{trailerId}")
+    public List<BreakingReport> getAllByTrailerId(@PathVariable(value = "trailerId") Long trailerId){
+        return breakingReportService.findAllByTrailerId(trailerId);
     }
 }
