@@ -71,6 +71,6 @@ public class TrailerController {
     private Log newLog(Log.LogAction logAction, Trailer trailer, User user){
         return logRepository.save(new Log(null, LocalDateTime.now(),
                         trailer.getLocation(), logAction,
-                        trailer, user.getLastName()));
+                        trailer.getId(), user.getLastName()));
     }
 }

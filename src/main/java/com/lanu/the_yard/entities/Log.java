@@ -28,12 +28,10 @@ public class Log {
     private LogAction logAction;
 
     public enum LogAction{
-        PICKUP, DROP, BRAKE, FIX
+        PICKUP, DROP, BRAKING, FIXED
     }
 
-    @ManyToOne
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private Trailer trailer;
+    private Long trailerId;
 
     private String userLastName;
 }
