@@ -30,7 +30,7 @@ public class BreakingReportController {
     public BreakingReport createBreakingReport(@Valid @RequestBody BreakingReport breakingReport,
                                                Principal principal){
         User theUser = userService.findByUsername(principal.getName()).get();
-        newLog(Log.LogAction.BRAKING, breakingReport.getTrailerId(), theUser);
+        newLog(Log.LogAction.BREAKING, breakingReport.getTrailerId(), theUser);
         return breakingReportService.createBreakingReport(breakingReport, theUser);
     }
 
@@ -42,6 +42,16 @@ public class BreakingReportController {
     @GetMapping("/breakings/{breakingId}")
     public BreakingReport getBreakingById(@PathVariable(value = "breakingId") Long breakingId){
         return breakingReportService.findById(breakingId);
+    }
+
+    @GetMapping("breaking/fixBreakingDetail/{breakingReportId}/{breakingDetailId}")
+    public BreakingReport fixBreakingDetail(@PathVariable(value = "breakingReportId") Long breakingReportId,
+                                            @PathVariable(value = "breakingDetailId") Long breakingDetailId,
+                                            Principal principal){
+        User theUser = userService.findByUsername(principal.getName()).get();
+        BreakingReport breakingReport = breakingReportService.findById(breakingReportId);
+        newLog(Log.LogAction.FIXED, breakingReport.getTrailerId(), theUser);
+        return breakingReportService.fixBreakingDetail(breakingReportId, breakingDetailId, theUser);
     }
 
     private Log newLog(Log.LogAction logAction, Long trailerId, User user){

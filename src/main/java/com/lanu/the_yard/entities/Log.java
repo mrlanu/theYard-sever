@@ -28,7 +28,7 @@ public class Log {
     private LogAction logAction;
 
     public enum LogAction{
-        PICKUP, DROP, BRAKING, FIXED
+        PICKUP, DROP, BREAKING, FIXED
     }
 
     private Long trailerId;
