@@ -32,6 +32,11 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public boolean checkPassword(String pass, User user) {
+        return passwordEncoder.matches(pass, user.getPassword());
+    }
+
+    @Override
     public User saveUser(User user) {
         return userRepository.save(user);
     }

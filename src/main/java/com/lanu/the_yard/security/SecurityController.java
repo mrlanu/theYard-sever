@@ -15,6 +15,12 @@ public class SecurityController {
     @Autowired
     private UserService userService;
 
+    @PostMapping("/checkPass")
+    public boolean checkPassword(@RequestBody String pass, Principal principal){
+        User user = userService.findByUsername(principal.getName()).get();
+        return userService.checkPassword(pass, user);
+    }
+
     @PostMapping("/signup")
     public User registerUser(@Valid @RequestBody User user) {
         return userService.createUser(user);

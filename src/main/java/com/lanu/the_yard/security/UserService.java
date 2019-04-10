@@ -13,4 +13,6 @@ public interface UserService {
     Optional<User> findByUsername(String userName);
 
     User saveUser(User user);
+
+    boolean checkPassword(String pass, User user);
 }
