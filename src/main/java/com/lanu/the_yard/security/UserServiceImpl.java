@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService{
         }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRoles(Arrays.asList(new Role((long) 1, "USER")));
+        /*user.setRoles(Arrays.asList(new Role((long) 1, "USER")));*/
         user.setActive(true);
         User theUser = userRepository.save(user);
 
