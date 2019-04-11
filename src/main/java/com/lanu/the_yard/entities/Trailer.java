@@ -5,6 +5,7 @@ import com.lanu.the_yard.security.User;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -21,6 +22,10 @@ public class Trailer {
 
     private String number;
 
+    private String licensePlate;
+
+    private LocalDateTime annualInspectionDate;
+
     @Enumerated(EnumType.STRING)
     private TrailerType type;
 
@@ -31,6 +36,8 @@ public class Trailer {
     private String location;
 
     private Boolean broken;
+
+    private Boolean emptyTrlr;
 
     private Boolean available;
 
